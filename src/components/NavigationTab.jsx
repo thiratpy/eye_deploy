@@ -71,7 +71,7 @@ function NavigationTab() {
         <div className="flex items-center space-x-3">
           <Link to="/">
             <img
-              src="https://cdn-icons-png.flaticon.com/512/5211/5211539.png"
+              src="/src/assets/Untitled design.png  "
               alt="Logo"
               className="h-14 mx-auto object-cover rounded-full truncate cursor-pointer border border-amber-600"
             />
@@ -111,7 +111,7 @@ function NavigationTab() {
           <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 md:flex-row md:mt-0 md:border-0 md:bg-transparent">
             <li>
               <div
-                className="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 transition-transform transform  hover:shadow-lg cursor-pointer flex items-center relative"
+                className="block py-2 px-3 text-amber-600 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 transition-transform transform  hover:shadow-lg cursor-pointer flex items-center relative"
                 onClick={handleUserDataClick}
               >
                 {user ? (
