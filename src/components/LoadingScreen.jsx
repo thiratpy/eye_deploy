@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom'; // To get passed data and navigate
+import { useLocation, useNavigate } from 'react-router-dom'; 
 
 const LoadingScreen = () => {
-    const location = useLocation(); // Get the state from navigation (imageSrc)
-    const { imageSrc } = location.state || {}; // Destructure imageSrc passed from UploadRetinalImages
+    const location = useLocation(); 
+    const { imageSrc, patient } = location.state || {};
     const [model, setModel] = useState(null);
     const [loadingText, setLoadingText] = useState('Loading...');
     const [loadingPercentage, setLoadingPercentage] = useState(0);
     const loadingIntervalRef = useRef(null);
-    const navigate = useNavigate(); // For navigation after prediction
+    const navigate = useNavigate(); 
 
     const URL = "https://teachablemachine.withgoogle.com/models/OCZV44JVY/";
 
@@ -22,14 +22,14 @@ const LoadingScreen = () => {
 
                 const loadedModel = await tmImage.load(modelURL, metadataURL);
                 setModel(loadedModel);
-                simulateLoading(loadedModel); // Start the loading simulation once the model is loaded
+                simulateLoading(loadedModel); 
             } catch (error) {
                 console.error("Failed to load the model", error);
                 setLoadingText('Error loading model');
             }
         };
 
-        // Start the model loading process
+        
         loadModel();
     }, []);
 
@@ -49,17 +49,17 @@ const LoadingScreen = () => {
                     setLoadingText('Almost done...');
                 }
 
-                // Stop incrementing once we hit 100
+               
                 if (nextValue >= 100) {
                     clearInterval(loadingIntervalRef.current);
                     setLoadingText('Prediction complete!');
-                    handlePrediction(loadedModel); // Process the prediction after loading finishes
-                    return 100; // Ensure the percentage doesn't exceed 100
+                    handlePrediction(loadedModel); 
+                    return 100; 
                 }
 
                 return nextValue;
             });
-        }, 40); // Speed of loading (adjust as needed)
+        }, 40); 
     };
 
     const handlePrediction = async (loadedModel) => {
@@ -69,20 +69,25 @@ const LoadingScreen = () => {
             imgElement.onload = async () => {
                 const prediction = await loadedModel.predict(imgElement);
 
-                // Format prediction data for the results page
+                
                 const formattedPredictions = prediction.map((p) => ({
-                    className: p.className, // Name of the syndrome
-                    probability: p.probability // Probability value
+                    className: p.className, 
+                    probability: p.probability 
                 }));
 
-                // Navigate to ResultsPage with the prediction data
-                navigate('/results', { state: { predictions: formattedPredictions } });
+                
+                navigate('/results', { 
+                    state: { 
+                        predictions: formattedPredictions, 
+                        patient: patient // Pass patient info to ResultsPage
+                    } 
+                });
             };
         }
     };
 
     return (
-        <div className="bg-gray-900 flex flex-col items-center justify-center h-screen">
+        <div className="bg-gray-900 flex flex-col items-center justify-center h-screen text-white">
             <div className="text-center text-2xl mb-5">{loadingText}</div>
             <progress className="progress w-64" value={loadingPercentage} max="100"></progress>
             <div className="text-center mt-2">{loadingPercentage}%</div>

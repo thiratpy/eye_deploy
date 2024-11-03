@@ -1,22 +1,58 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { createClient } from '@supabase/supabase-js';
+
+const supabase   
+ = createClient(
+    'https://eggaokvibnheenenongc.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnZ2Fva3ZpYm5oZWVuZW5vbmdjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk0MzIwNjEsImV4cCI6MjA0NTAwODA2MX0.FunJBC2X_9yxcyF7ZYMij7yphMhcBD9hjI6TjNRoGxk'
+);
 
 const ResultsPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { predictions } = location.state || {};
+    const { predictions, patient } = location.state || {};
+    const numid = patient ? patient.numid : null;
 
-    // List of possible syndromes and their labels
     const syndromeLabels = [
         { english: "Age related Macular Degeneration", thai: "จอเสื่อมตามอายุ" },
         { english: "Cataract", thai: "ต้อกระจก" },
-        { english: "Diabetes", thai: "เบาหวาน" },
+        { english: "Diabetes", thai: "เบาหวาน" },   
         { english: "Glaucoma", thai: "ต้อหิน" },
         { english: "Hypertension", thai: "ความดันสูง" },
         { english: "Pathological Myopia", thai: "สายตาสั้นผิดปกติ" },
         { english: "Normal", thai: "ทั่วไป" },
         { english: "Other", thai: "อื่นๆ " }
     ];
+
+    const handleSaveResults = async () => {
+        try {
+            if (!numid) {
+                console.error('No numid found. Cannot save results.');
+                alert('An error occurred. Please try again later.');
+                return;
+            }
+
+            const resultsString = JSON.stringify(predictions);
+
+            const { error } = await supabase
+                .from('user')
+                .update({ results: resultsString })
+                .eq('numid', numid);
+
+            if (error) {
+                console.error('Error saving results:', error);
+                alert('Error saving results. Please try again.');
+            } else {
+                console.log('Results saved successfully!');
+                alert('Results saved successfully!');
+                navigate('/doctor');
+            }
+        } catch (error) {
+            console.error('Error saving results:', error);
+            alert('An error occurred. Please try again later.');
+        }
+    };
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-6">
@@ -41,6 +77,13 @@ const ResultsPage = () => {
                     )}
                 </ul>
             </div>
+
+            <button
+                onClick={handleSaveResults}
+                className="mt-6 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition"
+            >
+                Save Results
+            </button>
 
             <button
                 onClick={() => navigate('/')}

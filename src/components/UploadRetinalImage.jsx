@@ -1,8 +1,19 @@
 // src/components/UploadRetinalImage.jsx
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { createClient } from '@supabase/supabase-js';
+
+const supabase = createClient(
+    'https://eggaokvibnheenenongc.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnZ2Fva3ZpYm5oZWVuZW5vbmdjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk0MzIwNjEsImV4cCI6MjA0NTAwODA2MX0.FunJBC2X_9yxcyF7ZYMij7yphMhcBD9hjI6TjNRoGxk'
+);
 
 const UploadRetinalImage = () => {
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const numid = searchParams.get('numid');
+    const name = searchParams.get('name');
+    const surname = searchParams.get('surname');
     const [file, setFile] = useState(null);
     const [imageSrc, setImageSrc] = useState(null);
     const navigate = useNavigate(); // For navigation to loading page
@@ -30,12 +41,17 @@ const UploadRetinalImage = () => {
     // Handle the click for upload
     const handleUploadClick = () => {
         if (imageSrc) {
-            // Navigate to the loading page, passing the imageSrc via state
-            navigate('/loading', { state: { imageSrc } });
-        } else {
+            // Pass all patient information along with imageSrc
+            navigate('/loading', { 
+              state: { 
+                imageSrc, 
+                patient: { numid, name, surname } 
+              } 
+            });
+          } else {
             alert('Please upload an image first.');
-        }
-    };
+          }
+        };
 
     return (
         <div className="bg-gray-100 min-h-screen w-full flex flex-col items-center p-6 md:p-10">
