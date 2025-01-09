@@ -71,7 +71,7 @@ function NavigationTab() {
         <div className="flex items-center space-x-3">
           <Link to="/">
             <img
-              src="/src/assets/Untitled design.png  "
+              src="https://thiratpy-bucket-s3.s3.ap-southeast-1.amazonaws.com/assets/Untitled+design.png"
               alt="Logo"
               className="h-14 mx-auto object-cover rounded-full truncate cursor-pointer border border-amber-600"
             />
