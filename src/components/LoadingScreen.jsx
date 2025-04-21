@@ -79,7 +79,7 @@ const LoadingScreen = () => {
                 navigate('/results', { 
                     state: { 
                         predictions: formattedPredictions, 
-                        patient: patient // Pass patient info to ResultsPage
+                        patient: patient // pass patient info to ResultsPage
                     } 
                 });
             };
