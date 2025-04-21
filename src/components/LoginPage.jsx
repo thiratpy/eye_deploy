@@ -108,7 +108,7 @@ function LoginPage() {
                             Sign In
                         </button>
                         <Link
-                            to="#" // Replace with the actual link for forgotten password
+                            to="#" // Temporary placeholder
                             className="mt-2 inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
                         >
                             ลืมรหัส?
