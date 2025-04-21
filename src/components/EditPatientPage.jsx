@@ -69,7 +69,7 @@ const EditPatientPage = () => {
                 alert('Error updating patient data. Please try again.');
             } else {
                 alert('Patient data updated successfully!');
-                navigate('/doctor'); // Or wherever you want to redirect
+                navigate('/doctor'); 
             }
         } catch (error) {
             console.error('Error updating patient data:', error);
@@ -90,7 +90,6 @@ const EditPatientPage = () => {
             <h1 className="text-3xl md:text-4xl font-bold text-blue-500 mb-8">Edit Patient Information</h1>
 
             <div className="bg-white shadow-md rounded-lg p-6 max-w-lg w-full">
-                {/* Input fields for name, surname, email, tel, date */}
                 <div className="mb-4">
                     <label htmlFor="name" className="block text-gray-700 font-bold mb-2">Name:</label>
                     <input 
@@ -146,7 +145,6 @@ const EditPatientPage = () => {
                     />
                 </div>
 
-                {/* Input field for gen */}
                 <div className="mb-4">
                     <label htmlFor="gen" className="block text-gray-700 font-bold mb-2">Gender:</label>
                     <select
