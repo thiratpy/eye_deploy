@@ -59,7 +59,6 @@ const WelcomeMenu = () => {
           </motion.div>
         </div>
         <footer className="text-white mt-6">
-          {/* You can add footer content here if needed */}
         </footer>
       </div>
     </motion.div>
