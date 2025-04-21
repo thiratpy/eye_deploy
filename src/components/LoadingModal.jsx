@@ -2,7 +2,7 @@ import React from "react";
 
 function LoadingModal({ show }) {
   if (!show) {
-    return null; // Don't render anything if show is false
+    return null; 
   }
 
   return (
