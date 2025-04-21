@@ -28,7 +28,6 @@ function NavigationTab() {
   
           if (error) {
             console.error("Error fetching user data:", error);
-            // If there's an error fetching user data, clear the potentially invalid credentials:
             localStorage.removeItem("user_role");
             localStorage.removeItem("user_email");
           } else {
@@ -36,8 +35,7 @@ function NavigationTab() {
           }
         } catch (error) {
           console.error("Error fetching user data:", error);
-          // If there's an error fetching user data, clear the potentially invalid credentials:
-          localStorage.removeItem("user_role");
+\          localStorage.removeItem("user_role");
           localStorage.removeItem("user_email");
         }
       }
@@ -54,7 +52,7 @@ function NavigationTab() {
     }
   };
 
-  const toggleMenu = () => {  // Here's the toggleMenu function
+  const toggleMenu = () => {  
     setIsOpen(!isOpen);
   };
 
