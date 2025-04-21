@@ -69,14 +69,13 @@ function RegisterPage() {
     }
 
     try {
-      // Insert data into Supabase
       const { error } = await supabase.from('user').insert([
         { 
           numid: nationalID,
           gen: title,
           name: firstName,
           surname: lastName,
-          password: password, // In a real app, hash this!
+          password: password, // Demo version, Password hatch is not yet included
           date: birthdate,
           email: email.toLowerCase(),
           tel: phoneNumber,
@@ -86,17 +85,14 @@ function RegisterPage() {
 
       if (error) {
         console.error('Error registering user:', error);
-        // Handle the error, e.g., show an error message to the user
       } else {
         console.log('User registered successfully!');
-        const from = location.state?.from?.pathname || '/login'; // Get the 'from' value or default to '/login'
+        const from = location.state?.from?.pathname || '/login'; 
         navigate(from, { replace: true }); 
-        // Optionally redirect the user to a login page or another page
       }
 
     } catch (error) {
       console.error('Error registering user:', error);
-      // Handle the error, e.g., show an error message to the user
     }
   };
   return (
@@ -110,7 +106,7 @@ function RegisterPage() {
       <div className="bg-gray-800 p-8 rounded shadow-md w-full max-w-5xl my-16">
         <h2 className="text-2xl font-bold text-white mb-4">สมัครเข้าใช้งาน (ผู้ป่วย)</h2>
         <form onSubmit={handleSubmit} className="w-full">
-          <div className="grid grid-cols-2 gap-4"> {/* Added grid for 2 columns */}
+          <div className="grid grid-cols-2 gap-4"> 
             {/* National ID */}
             <div>
               <label htmlFor="nationalID" className="block text-white text-sm font-bold mb-2">
@@ -280,7 +276,7 @@ function RegisterPage() {
             </div>
           </div> {/* Close the grid container */}
 
-          <div className="flex items-center justify-center mt-4"> {/* Added mt-4 for spacing */}
+          <div className="flex items-center justify-center mt-4"> 
             <button
               type="submit"
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-4 py-2 px-4 rounded focus:outline-none focus:shadow-outline"   
