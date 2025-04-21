@@ -1,4 +1,3 @@
-// src/components/UploadRetinalImage.jsx
 import React, { useState } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { createClient } from '@supabase/supabase-js';
@@ -16,12 +15,12 @@ const UploadRetinalImage = () => {
     const surname = searchParams.get('surname');
     const [file, setFile] = useState(null);
     const [imageSrc, setImageSrc] = useState(null);
-    const navigate = useNavigate(); // For navigation to loading page
+    const navigate = useNavigate(); 
 
-    // Handle the file input change
+
     const handleFileChange = (event) => {
         const file = event.target.files[0];
-        setFile(file); // Set the file in state
+        setFile(file); // set the file in state
 
         const reader = new FileReader();
         reader.onload = function(event) {
@@ -29,7 +28,7 @@ const UploadRetinalImage = () => {
             imgElement.src = event.target.result;
 
             imgElement.onload = function() {
-                setImageSrc(imgElement.src); // Set imageSrc as base64 URL
+                setImageSrc(imgElement.src); // set imageSrc as base64 URL
             };
         };
 
@@ -38,10 +37,8 @@ const UploadRetinalImage = () => {
         }
     };
 
-    // Handle the click for upload
     const handleUploadClick = () => {
         if (imageSrc) {
-            // Pass all patient information along with imageSrc
             navigate('/loading', { 
               state: { 
                 imageSrc, 
