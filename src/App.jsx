@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import WelcomeMenu from './components/WelcomeMenu';
-import Footer from './components/Footer'; // Assuming you already have this component
+import Footer from './components/Footer'; 
 import UploadRetinalImage from './components/UploadRetinalImage';
 import LoadingScreen from './components/LoadingScreen';
 import ResultsPage from './components/ResultsPage';
