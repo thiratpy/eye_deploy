@@ -4,9 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import LoadingModal from "./LoadingModal";
 import { createClient } from "@supabase/supabase-js";
 
-const supabase   = createClient(
-    'https://ygpzdeebucsazhrmophs.supabase.co',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlncHpkZWVidWNzYXpocm1vcGhzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjY0NDk3NTcsImV4cCI6MjA0MjAyNTc1N30.5fSKCllDGTBcWbVNItqYwcJy6l7Ra04GyZpc8rSgY9k'
+const supabase   
+ = createClient(
+    'https://hwetsveijlrdgswtqpxj.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh3ZXRzdmVpamxyZGdzd3RxcHhqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE1ODgzMDcsImV4cCI6MjA3NzE2NDMwN30.hqn3VvJjIARp2ukfhwzMm-y18En_oSzDS-mf7rf3-7U'
 );
 
 function LoginPage() {
